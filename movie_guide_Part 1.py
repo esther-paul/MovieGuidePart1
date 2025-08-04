@@ -41,7 +41,6 @@ def add_movie(movie_list):
     if name:
         movie_list.append(name)
         print(f'{name} was added.\n')
-        #display_movies(movie_list)
     else:
         print("Movie name cannot be empty.\n")
 
@@ -55,7 +54,6 @@ def delete_movie(movie_list):
         if 1 <= number <= len(movie_list):
             removed = movie_list.pop(number - 1)
             print(f'{removed} was deleted.\n')
-            #display_movies(movie_list)
         else:
             print("Invalid movie number.\n")
     except ValueError:
