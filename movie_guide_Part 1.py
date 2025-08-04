@@ -1,101 +1,88 @@
-# [Your Name]
-# CIS261
-# Movie Guide Part 1
-
+#Esther Paul
+#CIS261
+#Movie Guide Part1
 
 def display_menu():
     """
     Function to display the heading and menu choices
-    
-    Reference the sample screen shot for exact format
     """
-    # TODO: Display "The Movie List program" heading
-    # TODO: Display "COMMAND MENU" 
-    # TODO: Display menu options: list, add, del, exit with descriptions
-    pass
+    print("The Movie List program\n")
+    print("COMMAND MENU")
+    print("list - List all movies")
+    print("add  - Add a movie")
+    print("del  - Delete a movie")
+    print("exit - Exit Program\n")
 
 
 def create_movie_list():
     """
     Function to prepopulate a list with movie titles
-    Minimum of three titles must be in the original list
-    
-    Returns:
-        list: List containing initial movie titles
     """
-    # TODO: Create and return a list with at least 3 movie titles
-    pass
+    return ["Squid Game", "Super Man", "Spider Man"]
 
 
 def display_movies(movie_list):
     """
-    Function to display all titles in the list
-    Use the list as a parameter passed into the function
-    
-    Args:
-        movie_list (list): List of movie titles
+    Display all movies in the list with numbering
     """
-    # TODO: Display all movies in the list with numbers
-    # Format: "1. Movie Title"
-    pass
+    if not movie_list:
+        print("No movies in the list.\n")
+    else:
+        for i, movie in enumerate(movie_list, start=1):
+            print(f"{i}. {movie}")
+        print(end='\n')  
 
 
 def add_movie(movie_list):
     """
-    Function to add a title to the list
-    Use the list as a parameter passed into the function
-    
-    Args:
-        movie_list (list): List of movie titles
+    Add a new movie to the list
     """
-    # TODO: Prompt user for movie name
-    # TODO: Add movie to the list
-    # TODO: Display confirmation message
-    # TODO: Display the updated list
-    pass
+    name = input("Name: ").strip()
+    if name:
+        movie_list.append(name)
+        print(f'"{name}" was added.\n')
+        display_movies(movie_list)
+    else:
+        print("Movie name cannot be empty.\n")
 
 
 def delete_movie(movie_list):
     """
-    Function to delete a title from the list
-    Use the list as a parameter passed into the function
-    If user enters invalid number, display a message
-    
-    Args:
-        movie_list (list): List of movie titles
+    Delete a movie by its number
     """
-    # TODO: Prompt user for movie number to delete
-    # TODO: Validate the number (check if it's valid for the list)
-    # TODO: If valid, remove movie and display confirmation
-    # TODO: If invalid, display error message  
-    # TODO: Display the updated list (if deletion was successful)
-    pass
+    try:
+        number = int(input("Number: "))
+        if 1 <= number <= len(movie_list):
+            removed = movie_list.pop(number - 1)
+            print(f'"{removed}" was deleted.\n')
+            display_movies(movie_list)
+        else:
+            print("Invalid movie number.\n")
+    except ValueError:
+        print("Invalid input. Please enter a number.\n")
 
 
 def main():
     """
-    Main program function
+    Main program loop
     """
-    # TODO: Call display_menu function
-    
-    # TODO: Call create_movie_list function to get initial list
-    # movies = create_movie_list()
-    
-    # Main program loop
+    display_menu()
+    movies = create_movie_list()
+
     while True:
-        # TODO: Prompt user for command
-        # command = input("Command: ").lower()
-        
-        # TODO: Use if/elif statements to handle each command:
-        # - "list": call display_movies function
-        # - "add": call add_movie function  
-        # - "del": call delete_movie function
-        # - "exit": break from loop
-        # - invalid command: display error message
-        
-        pass
-    
-    # TODO: Display goodbye message
+        command = input("Command: ").strip().lower()
+
+        if command == "list":
+            display_movies(movies)
+        elif command == "add":
+            add_movie(movies)
+        elif command == "del":
+            delete_movie(movies)
+        elif command == "exit":
+            print("Bye!")
+            break
+        else:
+            print("Not a valid command. Please try again.\n")
 
 
 if __name__ == "__main__":
